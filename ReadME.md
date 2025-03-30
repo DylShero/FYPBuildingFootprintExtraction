@@ -1,1 +1,1 @@
-These are the files of my Final Year Project.
+These are the files of Dylan Sheridans Final year project "Building footprint extraction for ray tracing".
