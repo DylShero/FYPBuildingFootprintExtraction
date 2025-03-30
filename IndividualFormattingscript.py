@@ -3,7 +3,7 @@ import math
 from shapely.geometry import Polygon, shape, LineString
 from pyproj import Transformer
 
-# ----------- Config -----------
+#Config
 
 input_filename = "31310121.geojson"
 output_res_filename = "letterkenny_test.res"
@@ -12,7 +12,7 @@ open_path_filename = "open_path.txt"
 #Transformer to change from lon/lat to metres
 transformer = Transformer.from_crs("EPSG:4326", "EPSG:3857", always_xy=True)
 
-# ----------- Load and Process GeoJSON -----------
+#  Load and Process GeoJSON 
 
 with open(input_filename, "r") as f:
     geojson_obj = json.load(f)
@@ -63,7 +63,7 @@ print(f"\n GeoJSON validation complete.")
 print(f" {converted_count} convex polygons processed.")
 print(f" {invalid_count} skipped due to errors.")
 
-# ----------- Calculate Local Origin -----------
+#Calculate Local Origin 
 
 # Get bounding box for centre search
 all_coords = [pt for poly in building_polygons for pt in poly.exterior.coords]
@@ -75,7 +75,7 @@ centre_point = ((min_x + max_x) / 2, (min_y + max_y) / 2)
 # Convert centre_point (lon, lat) to metres for local origin offset
 origin_x, origin_y = transformer.transform(centre_point[0], centre_point[1])
 
-# ----------- Order Buildings by Distance from Origin -----------
+# Order Buildings by Distance from Origin
 
 buildings_with_distance = []
 
@@ -90,7 +90,7 @@ for feature, polygon in zip(valid_features, building_polygons):
 # Sort by distance to origin
 buildings_with_distance.sort(key=lambda x: x[0])
 
-# ----------- Write Edges to .res File -----------
+# Write Edges to .res File 
 
 with open(output_res_filename, "w", encoding="utf-8") as res_file:
     
@@ -121,7 +121,7 @@ with open(output_res_filename, "w", encoding="utf-8") as res_file:
 
 print(f" Edge data saved to: {output_res_filename}")
 
-# ----------- Reliable 1-Metre Open Path Finder -----------
+# Open Path Finder
 
 def is_clear_path(start, end, buildings):
     path = LineString([start, end])
@@ -158,7 +158,7 @@ start, end = find_open_path()
 if start and end:
     with open(open_path_filename, "w", encoding="utf-8") as f:
         f.write(f"Open path near centre (>=1m):\nStart: {start}\nEnd: {end}\n")
-    print(f"🚶 Open path written to: {open_path_filename}")
+    print(f" Open path written to: {open_path_filename}")
     print(f"Start: {start}, End: {end}")
 else:
     print(" No open path found after grid scan.")
