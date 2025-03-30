@@ -5,7 +5,7 @@ import math
 from shapely.geometry import Polygon, shape, LineString
 from pyproj import Transformer
 
-# ----------- Configuration -----------
+# Configuration
 
 location = 'Ireland'
 output_res_filename = "output_edges.res"
@@ -14,7 +14,7 @@ max_files = 5  # Set the maximum number of GeoJSON files to generate
 
 transformer = Transformer.from_crs("EPSG:4326", "EPSG:3857", always_xy=True)
 
-# ----------- Download GeoJSON -----------
+#  Download GeoJSON 
 
 def download_geojson(location, max_files=None):
     dataset_links = pd.read_csv("https://minedbuildings.z5.web.core.windows.net/global-buildings/dataset-links.csv")
@@ -33,7 +33,7 @@ def download_geojson(location, max_files=None):
 
     return geojson_files
 
-# ----------- Process GeoJSON -----------
+# Process GeoJSON
 
 def process_geojson(file):
     with open(file, "r") as f:
@@ -66,7 +66,7 @@ def process_geojson(file):
 
     return valid_features, building_polygons
 
-# ----------- Calculate Edges and Origin -----------
+# Calculate Edges and Origin
 
 def calculate_edges(valid_features, building_polygons, output_filename):
     all_coords = [pt for poly in building_polygons for pt in poly.exterior.coords]
@@ -104,7 +104,7 @@ def calculate_edges(valid_features, building_polygons, output_filename):
                 total_edges += 1
                 res_file.write(f"{x1} {y1} {x2} {y2} {height} {building_number} 1 {total_edges}\n")
 
-# ----------- Main Execution -----------
+#  Main Execution 
 
 def main():
     geojson_files = download_geojson(location, max_files=max_files)
