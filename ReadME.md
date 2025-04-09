@@ -7,7 +7,7 @@ References
 make-gis-friendly.py. Microsoft. Accessed: Jan. 28, 2025 [Online]. Available:https://github.com/microsoft/GlobalMLBuildingFootprints/blob/main/scripts/make-gis-friendly.py
 
 
-##Setup
+## Setup
 
 1. Install Visual Studio Code 
 
@@ -15,19 +15,19 @@ make-gis-friendly.py. Microsoft. Accessed: Jan. 28, 2025 [Online]. Available:htt
 
 3. Create a Python environment
 
-![CreateEnvironment](images/PythonCreateEnvironment.png)
+![CreateEnvironment](SetupImages/PythonCreateEnvironment.png)
 
 4. Select to create a virtual environment (Venv)
 
-![SelectVirtualEnvironment](images/SelectVenv.png)
+![SelectVirtualEnvironment](SetupImages/SelectVenv.png)
 
 5. Select the version of Python you want to use
 
-![SelectPythonVersion](images/SelectPythonVersion.png)
+![SelectPythonVersion](SetupImages/SelectPythonVersion.png)
 
 6. Select Requirements.txt to install necessary dependencies
 
-![SelectDependencies](images/SelectDependencies.png)
+![SelectDependencies](SetupImages/SelectDependencies.png)
 
 7. Open a terminal and type in "python scriptname.py" to run a given scripts.
    Eg. "python FinalMergedScript.py"
